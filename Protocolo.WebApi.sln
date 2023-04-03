@@ -5,23 +5,23 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Publisher", "Publisher", "{05198C2F-B9F1-41F5-8647-2F5765F9DCB6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Protocolo.Publisher.App", "Publisher\Protocolo.Publisher.App\Protocolo.Publisher.App.csproj", "{0F422052-3106-444E-99A8-FC42DFAF9B68}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Protocolo.Publisher.Business", "Publisher\Protocolo.Publisher.Business\Protocolo.Publisher.Business.csproj", "{436E2C33-E625-480D-B820-6B9DF614C533}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Consumer", "Consumer", "{A402DB2F-D35B-4F2C-B9CD-50DAD6AFADA4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Protocolo.Consumer.App", "Consumer\Protocolo.Consumer.App\Protocolo.Consumer.App.csproj", "{9CB4C055-9AF4-435B-9E71-0783F27A066E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{91AD4947-4117-463D-8D15-E87871140E53}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Protocolo.Models", "Protocolo.Models\Protocolo.Models.csproj", "{05F296A9-6D8A-44ED-A415-706C8E645773}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Protocolo.Publisher.App", "src\Publisher\Protocolo.Publisher.App\Protocolo.Publisher.App.csproj", "{0F422052-3106-444E-99A8-FC42DFAF9B68}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Protocolo.Publisher.Repository", "Publisher\Protocolo.Publisher.Repository\Protocolo.Publisher.Repository.csproj", "{5B72B523-3CEA-470E-BC36-B29721E7BC4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Protocolo.Publisher.Business", "src\Publisher\Protocolo.Publisher.Business\Protocolo.Publisher.Business.csproj", "{436E2C33-E625-480D-B820-6B9DF614C533}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Protocolo.Consumer.Service", "Consumer\Protocolo.Consumer.Service\Protocolo.Consumer.Service.csproj", "{56236FDB-2DC5-4C88-BCBC-C9058B97C4BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Protocolo.Consumer.App", "src\Consumer\Protocolo.Consumer.App\Protocolo.Consumer.App.csproj", "{9CB4C055-9AF4-435B-9E71-0783F27A066E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Protocolo.Consumer.Repository", "Consumer\Protocolo.Consumer.Repository\Protocolo.Consumer.Repository.csproj", "{0E86B6F5-5739-4DBA-AD6C-B1E4C21937D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Protocolo.Publisher.Repository", "src\Publisher\Protocolo.Publisher.Repository\Protocolo.Publisher.Repository.csproj", "{5B72B523-3CEA-470E-BC36-B29721E7BC4A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Protocolo.Consumer.Service", "src\Consumer\Protocolo.Consumer.Service\Protocolo.Consumer.Service.csproj", "{56236FDB-2DC5-4C88-BCBC-C9058B97C4BC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Protocolo.Consumer.Repository", "src\Consumer\Protocolo.Consumer.Repository\Protocolo.Consumer.Repository.csproj", "{0E86B6F5-5739-4DBA-AD6C-B1E4C21937D6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Protocolo.Models", "src\Protocolo.Models\Protocolo.Models.csproj", "{05F296A9-6D8A-44ED-A415-706C8E645773}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
