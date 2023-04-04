@@ -2,7 +2,7 @@
 using Serilog.Context;
 using System.Runtime.CompilerServices;
 
-namespace DigitalSignature.Infrastructure.Extensions
+namespace Protocolo.Models.Extensions
 {
     public static class LogExtensions
     {

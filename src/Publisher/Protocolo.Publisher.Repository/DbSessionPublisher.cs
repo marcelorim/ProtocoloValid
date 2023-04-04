@@ -14,7 +14,7 @@ namespace Protocolo.Publisher.Repository
         {
             get
             {
-                return new SqlConnection(_configuration.GetConnectionString("DSApiConnection"));
+                return new SqlConnection(_configuration.GetConnectionString("ProtocoloApiConnection"));
             }
         }
 

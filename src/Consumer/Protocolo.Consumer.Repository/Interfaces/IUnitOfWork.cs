@@ -2,10 +2,8 @@
 
 namespace Protocolo.Consumer.Repository.Interfaces
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork
     {
-        void BeginTransaction();
-        void Commit();
-        void Rollback();
+        IProtocoloRepository Protocolo { get; }
     }
 }

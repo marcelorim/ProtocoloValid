@@ -1,10 +1,10 @@
-﻿using DigitalSignature.Infrastructure.Extensions;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Protocolo.Consumer.Repository.Interfaces;
 using Protocolo.Consumer.Service.Interfaces;
 using Protocolo.Models.DTO;
 using Protocolo.Models.Entities;
 using Protocolo.Models.Utils;
+using Protocolo.Models.Extensions;
 
 namespace Protocolo.Consumer.Service.Services
 {
@@ -19,22 +19,25 @@ namespace Protocolo.Consumer.Service.Services
             _protocoloRepository = protocoloRepository;
         }
 
-        public async Task<RetornoDTO> InserirDadosProtocolo(ProtocoloEntity entity)
+        public async Task<bool> InserirDadosProtocolo(ProtocoloEntity entity)
         {
             try
             {
-                var retorno = await ValidarDadosFila(entity);
-                if (!retorno.Sucesso)
-                {
-                    return await Task.FromResult(retorno);
-                }
-                else
-                {
-                    var sucesso = await _protocoloRepository.Insert(entity);
-                    return sucesso;
+                var sucesso = await _protocoloRepository.Insert(entity);
+                return sucesso;
 
-                    return await Task.FromResult(retorno);
-                }
+                //var retorno = await ValidarDadosFila(entity);
+                //if (!retorno.Sucesso)
+                //{
+                //    return await Task.FromResult(retorno);
+                //}
+                //else
+                //{
+                //    var sucesso = await _protocoloRepository.Insert(entity);
+                //    return sucesso;
+
+                //    //return await Task.FromResult(retorno);
+                //}
             }
             catch (Exception ex)
             {

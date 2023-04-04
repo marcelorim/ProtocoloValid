@@ -46,14 +46,14 @@ namespace Protocolo.Publisher.Business.Services
             var entity = new ProtocoloEntity()
             {
                 Id = Guid.NewGuid(),
-                NumProtocolo = faker.Random.Number(1, 1000),
-                NumViaDocumento = faker.Random.Number(1, 1000),
-                Cpf = Convert.ToInt64(Regex.Replace(Utils.Extensions.GerarCpf(), "[^0-9]", "")),
-                Rg = Convert.ToInt64(Regex.Replace(Utils.Extensions.GerarRG(), "[^0-9]", "")),
+                NumProtocolo = new Random().Next(999999999),
+                NumViaDoc = faker.Random.Number(1, 50),
+                NumCpf = Convert.ToInt64(Regex.Replace(Utils.Extensions.GerarCpf(), "[^0-9]", "")),
+                NumRg = Convert.ToInt64(Regex.Replace(Utils.Extensions.GerarRG(), "[^0-9]", "")),
                 Nome = faker.Name.FullName(),
                 NomeMae = faker.Name.FullName(Gender.Female),
                 NomePai = faker.Name.FullName(Gender.Male),
-                //RuleFor(o => o.Foto = faker.PickRandom())
+                Foto = faker.Internet.Avatar()
             };
 
             return entity;
@@ -91,13 +91,12 @@ namespace Protocolo.Publisher.Business.Services
             return Task.FromResult(retorno);
         }
 
-        public async Task<ProtocoloEntity> ObterPorProtocolo(int numProtocolo)
+        public async Task<ProtocoloEntity> ObterPorParametro(long? numProtocolo, long? numCpf, long? numRg)
         {
             try
             {
-                var entity = await _protocoloRepository.GetByProtocolo(numProtocolo);
+                var entity = await _protocoloRepository.GetByParametro(numProtocolo, numCpf, numRg);
                 return entity;
-                //throw new NotImplementedException();
             }
             catch (Exception ex)
             {
@@ -105,5 +104,6 @@ namespace Protocolo.Publisher.Business.Services
                 throw new Exception(Mensagem.Erro);
             }
         }
+
     }
 }

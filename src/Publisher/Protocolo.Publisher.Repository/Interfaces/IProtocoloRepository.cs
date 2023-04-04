@@ -4,8 +4,6 @@ namespace Protocolo.Publisher.Repository.Interfaces
 {
     public interface IProtocoloRepository
     {
-        Task<ProtocoloEntity> GetByProtocolo(int numProtocolo);
-        Task<ProtocoloEntity> GetByCpf(int numCpf);
-        Task<ProtocoloEntity> GetByRg(int numRg);
+        Task<ProtocoloEntity> GetByParametro(long? numProtocolo, long? numCpf, long? numRg);
     }
 }

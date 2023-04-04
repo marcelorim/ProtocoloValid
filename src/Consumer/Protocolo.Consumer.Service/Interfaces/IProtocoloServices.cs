@@ -5,6 +5,6 @@ namespace Protocolo.Consumer.Service.Interfaces
 {
     public interface IProtocoloServices
     {
-        Task<RetornoDTO> InserirDadosProtocolo(ProtocoloEntity entity);
+        Task<bool> InserirDadosProtocolo(ProtocoloEntity entity);
     }
 }

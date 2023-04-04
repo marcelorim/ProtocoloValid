@@ -32,14 +32,43 @@ namespace Protocolo.Publisher.App.Controllers
             }
         }
 
-        [HttpGet("{numProtocolo:int}")]
-        public async Task<IActionResult> ObterPorProtocolo(int numProtocolo)
+        [HttpGet("ObterPorProtocolo/{numProtocolo:long}")]
+        public async Task<IActionResult> ObterPorProtocolo(long numProtocolo)
         {
             try
             {
-                await _protocoloServices.ObterPorProtocolo(numProtocolo); return Accepted();
-                //var retorno = await _protocoloServices.ObterPorProtocolo(numProtocolo);
-                //return Ok(retorno);
+                var retorno = await _protocoloServices.ObterPorParametro(numProtocolo, null, null);
+                return Ok(retorno);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(Mensagem.Erro, ex);
+                return new StatusCodeResult(500);
+            }
+        }
+
+        [HttpGet("ObterPorCpf/{numCpf:long}")]
+        public async Task<IActionResult> ObterPorCpf(long numCpf)
+        {
+            try
+            {
+                var retorno = await _protocoloServices.ObterPorParametro(null, numCpf, null);
+                return Ok(retorno);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(Mensagem.Erro, ex);
+                return new StatusCodeResult(500);
+            }
+        }
+
+        [HttpGet("ObterPorRg/{numRg:long}")]
+        public async Task<IActionResult> ObterPorRg(long numRg)
+        {
+            try
+            {
+                var retorno = await _protocoloServices.ObterPorParametro(null, null, numRg);
+                return Ok(retorno);
             }
             catch (Exception ex)
             {

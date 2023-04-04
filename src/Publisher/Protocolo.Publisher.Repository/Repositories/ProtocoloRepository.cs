@@ -16,29 +16,40 @@ namespace Protocolo.Publisher.Repository.Repositories
             _session = session;
         }
 
-        const string queryComAlias = @"SELECT ID, NUM_PROTOCOLO, NUM_VIA_DOCUMENTO, CPF, RG, NOME, NOME_MAE, NOME_PAI, FOTO FROM TB_PROTOCOLO ";
+        const string queryComAlias = @"   SELECT ID				AS Id, 
+		                                         NUM_PROTOCOLO	AS NumProtocolo, 
+		                                         NUM_VIA_DOC	AS NumViaDoc, 
+		                                         NUM_CPF		AS NumCpf, 
+		                                         NUM_RG			AS NumRg, 
+		                                         NOME			AS Nome, 
+		                                         NOME_MAE		AS NomeMae, 
+		                                         NOME_PAI		AS NomePai, 
+		                                         FOTO			AS Foto
+	                                        FROM TB_PROTOCOLO ";
 
-        public async Task<ProtocoloEntity> GetByProtocolo(int numProtocolo)
+        public async Task<ProtocoloEntity> GetByParametro(long? numProtocolo, long? numCpf, long? numRg)
         {
-            string sql = queryComAlias + @"WHERE NUM_PROTOCOLO = @NumProtocolo;";
+            string strParametro = string.Empty;
+            object objParametro = new();
+            if (numProtocolo.HasValue)
+            {
+                strParametro = @"WHERE NUM_PROTOCOLO = @NumProtocolo;";
+                objParametro = new { NumProtocolo = numProtocolo };
+            }
+            else if (numCpf.HasValue)
+            {
+                strParametro = @"WHERE NUM_CPF = @NumCpf;";
+                objParametro = new { NumCpf = numCpf };
+            }
+            else if (numRg.HasValue)
+            {
+                strParametro = @"WHERE NUM_RG = @NumRg;";
+                objParametro = new { NumRg = numRg };
+            }
 
-            var result = await _session.Connection.QueryFirstOrDefaultAsync<ProtocoloEntity>(sql, new { NumProtocolo = numProtocolo });
-            return result;
-        }
+            string sql = queryComAlias + strParametro;
 
-        public async Task<ProtocoloEntity> GetByCpf(int numCpf)
-        {
-            string sql = queryComAlias + @"WHERE CPF = @Cpf;";
-
-            var result = await _session.Connection.QueryFirstOrDefaultAsync<ProtocoloEntity>(sql, new { Cpf = numCpf });
-            return result;
-        }
-
-        public async Task<ProtocoloEntity> GetByRg(int numRg)
-        {
-            string sql = queryComAlias + @"WHERE RG = @id;";
-
-            var result = await _session.Connection.QueryFirstOrDefaultAsync<ProtocoloEntity>(sql, new { Rg = numRg });
+            var result = await _session.Connection.QueryFirstOrDefaultAsync<ProtocoloEntity>(sql, objParametro);
             return result;
         }
     }

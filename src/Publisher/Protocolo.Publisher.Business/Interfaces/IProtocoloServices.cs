@@ -5,6 +5,6 @@ namespace Protocolo.Publisher.Business.Interfaces
     public interface IProtocoloServices
     {
         Task MontaDadosEnviaFila();
-        Task<ProtocoloEntity> ObterPorProtocolo(int numProtocolo);
+        Task<ProtocoloEntity> ObterPorParametro(long? numProtocolo, long? numCpf, long? numRg);
     }
 }

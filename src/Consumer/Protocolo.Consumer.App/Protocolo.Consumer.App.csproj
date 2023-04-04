@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="MessageConsumer\**" />
+    <Content Remove="MessageConsumer\**" />
+    <EmbeddedResource Remove="MessageConsumer\**" />
+    <None Remove="MessageConsumer\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Controllers\ConsumerController.cs" />
   </ItemGroup>
 

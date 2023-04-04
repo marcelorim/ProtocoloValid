@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Protocolo.Consumer.Repository.Interfaces;
+using Protocolo.Consumer.Service.Interfaces;
 using Protocolo.Models.Entities;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -11,54 +13,48 @@ namespace Protocolo.Consumer.Services
     public class InfoWorker : BackgroundService
     {
         private readonly ILogger<InfoWorker> _logger;
+        private readonly IUnitOfWork _unitOfWork;
+        private IConnection _connection;
+        private IModel _channel;
+        const string quebraLinha = $"\n";
 
-        public InfoWorker(ILogger<InfoWorker> logger)
+        public InfoWorker(ILogger<InfoWorker> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
+            var factory = new ConnectionFactory { HostName = "localhost", UserName = "guest", Password = "guest" };
+            _connection = factory.CreateConnection();
+            _channel = _connection.CreateModel();
+            _channel.QueueDeclare(queue: "protocoloQueue", durable: false, exclusive: false, autoDelete: false, arguments: null);
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            while (!stoppingToken.IsCancellationRequested)
+            stoppingToken.ThrowIfCancellationRequested();
+            _logger.LogInformation(quebraLinha + $"### PROCESSAMENTO DE CONSUMO INICIADO EM: {DateTime.Now:G} ###" + quebraLinha);
+            var consumer = new EventingBasicConsumer(_channel);
+            consumer.Received += (channel, evt) =>
             {
-                try
-                {
-                    _logger.LogInformation($"{DateTime.Now:G} : Procurando ítem na fila....");
+                var message = Encoding.UTF8.GetString(evt.Body.ToArray());
+                var protocolo = JsonSerializer.Deserialize<ProtocoloEntity>(message);
+                ProcessarEnvio(protocolo).GetAwaiter().GetResult();
 
-                    var factory = new ConnectionFactory { HostName = "localhost" };
-                    using var connection = factory.CreateConnection();
-                    using var channel = connection.CreateModel();
+                _logger.LogInformation(quebraLinha +
+                    $"--------------------------------------------------------" + quebraLinha +
+                    $"### DADOS PROTOCOLO ###" + quebraLinha +
+                    $"Nº Protocolo: {protocolo.NumProtocolo} | Via: {protocolo.NumViaDoc}" + quebraLinha +
+                    $"Nome: {protocolo.Nome} | CPF: {protocolo.NumCpf} | RG: {protocolo.NumRg}" + quebraLinha +
+                    $"--------------------------------------------------------" + quebraLinha
+                );
+                _channel.BasicAck(evt.DeliveryTag, false);
+            };
+            _channel.BasicConsume(queue: "protocoloQueue", autoAck: false, consumer: consumer);
+            return Task.CompletedTask;
+        }
 
-                    channel.QueueDeclare(queue: "protocoloQueue",
-                                         durable: false,
-                                         exclusive: false,
-                                         autoDelete: false,
-                                         arguments: null);
-
-                    var consumer = new EventingBasicConsumer(channel);
-                    consumer.Received += (model, ea) =>
-                    {
-                        var body = ea.Body.ToArray();
-                        var message = Encoding.UTF8.GetString(body);
-                        var protocolo = JsonSerializer.Deserialize<ProtocoloEntity>(message);
-
-                        _logger.LogInformation($"[*] DADOS PROTOCOLO [*] \n " +
-                            $"Nº Protocolo: {protocolo.NumProtocolo} | Via: {protocolo.NumViaDocumento} \n " +
-                            $"Nome: {protocolo.Nome} | CPF: {protocolo.Cpf} | RG: {protocolo.Rg} \n" +
-                            $"-----------------");
-                    };
-                    channel.BasicConsume(queue: "protocoloQueue",
-                                         autoAck: true,
-                                         consumer: consumer);
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError("Erro ao consumir a fila.", ex);
-                    throw new Exception(ex.Message);
-                }
-
-                await Task.Delay(1000, stoppingToken);
-            }
+        private async Task ProcessarEnvio(ProtocoloEntity protocolo)
+        {
+            await _unitOfWork.Protocolo.Insert(protocolo);
         }
     }
 }

@@ -17,7 +17,6 @@ namespace Protocolo.Consumer.App.Configuration
             #region Repository
             services.AddSingleton<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IProtocoloRepository, ProtocoloRepository>();
-            services.AddSingleton<DbSession>();
             #endregion
 
 
