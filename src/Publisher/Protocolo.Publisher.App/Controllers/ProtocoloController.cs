@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Protocolo.Models.Extensions;
 using Protocolo.Models.Utils;
 using Protocolo.Publisher.Business.Interfaces;
 
@@ -17,21 +18,27 @@ namespace Protocolo.Publisher.App.Controllers
             _protocoloServices = protocoloServices;
         }
 
-        [HttpGet("InserirFila")]
+        /// <summary>
+        /// Inclusão de dados a fila do RabbitMQ
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("IncluirDadosNaFila")]
         public async Task<IActionResult> InserirFila()
         {
             try
             {
                 await _protocoloServices.MontaDadosEnviaFila();
-                return Accepted();
+                return Ok(Mensagem.Sucesso);
             }
             catch (Exception ex)
             {
-                _logger.LogError("Erro ao criar a fila.", ex);
+                _logger.LogError(Mensagem.ErroInclusaoFila, ex);
+                _logger.AddLogError(Mensagem.ErroInclusaoFila + " : " + ex);
                 return new StatusCodeResult(500);
             }
         }
 
+        //
         [HttpGet("ObterPorProtocolo/{numProtocolo:long}")]
         public async Task<IActionResult> ObterPorProtocolo(long numProtocolo)
         {
@@ -43,6 +50,7 @@ namespace Protocolo.Publisher.App.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(Mensagem.Erro, ex);
+                _logger.AddLogError(Mensagem.ErroInclusaoFila + " : " + ex);
                 return new StatusCodeResult(500);
             }
         }
@@ -58,6 +66,7 @@ namespace Protocolo.Publisher.App.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(Mensagem.Erro, ex);
+                _logger.AddLogError(Mensagem.ErroInclusaoFila + " : " + ex);
                 return new StatusCodeResult(500);
             }
         }
@@ -73,6 +82,7 @@ namespace Protocolo.Publisher.App.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(Mensagem.Erro, ex);
+                _logger.AddLogError(Mensagem.ErroInclusaoFila + " : " + ex);
                 return new StatusCodeResult(500);
             }
         }

@@ -10,15 +10,15 @@ using System.Text.Json;
 
 namespace Protocolo.Consumer.Services
 {
-    public class InfoWorker : BackgroundService
+    public class InfoMessageConsumer : BackgroundService
     {
-        private readonly ILogger<InfoWorker> _logger;
+        private readonly ILogger<InfoMessageConsumer> _logger;
         private readonly IUnitOfWork _unitOfWork;
         private IConnection _connection;
         private IModel _channel;
         const string quebraLinha = $"\n";
 
-        public InfoWorker(ILogger<InfoWorker> logger, IUnitOfWork unitOfWork)
+        public InfoMessageConsumer(ILogger<InfoMessageConsumer> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;

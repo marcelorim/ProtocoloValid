@@ -3,7 +3,7 @@
     public class Mensagem
     {
         /// <summary>
-        /// Mensagem padrão de SUCESSO do sistema
+        /// Mensagem padrão de sucesso da api
         /// </summary>
         public static string Sucesso
         {
@@ -11,7 +11,7 @@
         }
 
         /// <summary>
-        /// Mensagem padrão de FALHA do sistema
+        /// Mensagem padrão de falha da api
         /// </summary>
         public static string Falha
         {
@@ -19,7 +19,7 @@
         }
 
         /// <summary>
-        /// Mensagem padrão de ERRO do sistema
+        /// Mensagem padrão de erro da api
         /// </summary>
         public static string Erro
         {
@@ -27,7 +27,17 @@
         }
 
         /// <summary>
-        /// Mensagem padrão de validar DUPLICIDADE do sistema
+        /// Mensagem para erro de inclusão na fila da api
+        /// </summary>
+        public static string ErroInclusaoFila
+        {
+            get { return "Erro ao criar a fila."; }
+        }
+
+        //
+
+        /// <summary>
+        /// Mensagem para validar duplicidade de registro da api
         /// </summary>
         public static string Duplicidade
         {
