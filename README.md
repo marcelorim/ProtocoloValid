@@ -14,8 +14,6 @@
 
 :small_blue_diamond: [Como rodar a aplicação](#como-rodar-a-aplicação-arrow_forward)
 
-... 
-
 ## Descrição do projeto 
 
 <p align="justify">
@@ -36,8 +34,6 @@
 
 > Projeto para ser executado no modo start multiplo no visual studio 2022, setando como inicialização od projetos: Protocolo.Consumer.App e Protocolo.Publisher.App
 
-... 
-
 ## Pré-requisitos
 
 :warning: [.NET6](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
@@ -47,8 +43,7 @@
 :warning: [Sql Server Express 2019](https://www.microsoft.com/pt-br/download/details.aspx?id=101064)
 :warning: [Sql Management Studio](https://learn.microsoft.com/pt-BR/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16)
 :warning: [Github](https://github.com/)
-
-... 
+:warning: [Bogus](https://github.com/bchavez/Bogus)
 
 ## Como rodar a aplicação :arrow_forward:
 
@@ -57,14 +52,20 @@ Rodar no visual studio 2022:
 ```
 git clone https://github.com/marcelorim/ProtocoloValid
 ```
+ 
+## JSON :floppy_disk:
 
-... 
+### Usuários: 
+
+Para realizar a autenticação na api é necessário enviar o usuário e senha para obter o token de acesso aos endpoints.
+|login|senha|token|
+| -------- |-------- |-------- |
+|valid|valid@1234|true|
 
 ## Desenvolvedores/Contribuintes :octocat:
 
-[<img src="https://avatars.githubusercontent.com/u/1753492?s=400&v=4" width=115><br><sub>Marcelo Ferreira</sub>](https://github.com/marcelorim) 
-
-... 
+| [<img src="https://avatars.githubusercontent.com/u/1753492?s=400&v=4" width=115><br><sub>Marcelo Ferreira</sub>](https://github.com/marcelorim) | 
+| :---: |
 
 ## Licença 
 
