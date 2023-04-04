@@ -62,8 +62,6 @@ git clone https://github.com/marcelorim/ProtocoloValid
 
 ## Desenvolvedores/Contribuintes :octocat:
 
-Liste o time responsável pelo desenvolvimento do projeto
-
 [<img src="https://avatars.githubusercontent.com/u/1753492?s=400&v=4" width=115><br><sub>Marcelo Ferreira</sub>](https://github.com/marcelorim) 
 
 ... 
