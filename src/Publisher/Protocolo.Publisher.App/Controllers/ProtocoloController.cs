@@ -38,7 +38,11 @@ namespace Protocolo.Publisher.App.Controllers
             }
         }
 
-        //
+        /// <summary>
+        /// Obtém protocolo já processado da fila no banco.
+        /// </summary>
+        /// <param name="numProtocolo"></param>
+        /// <returns>ProtocoloEntity</returns>
         [HttpGet("ObterPorProtocolo/{numProtocolo:long}")]
         public async Task<IActionResult> ObterPorProtocolo(long numProtocolo)
         {
@@ -55,6 +59,11 @@ namespace Protocolo.Publisher.App.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtém protocolo já processado da fila no banco.
+        /// </summary>
+        /// <param name="numCpf"></param>
+        /// <returns>ProtocoloEntity</returns>
         [HttpGet("ObterPorCpf/{numCpf:long}")]
         public async Task<IActionResult> ObterPorCpf(long numCpf)
         {
@@ -71,6 +80,11 @@ namespace Protocolo.Publisher.App.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtém protocolo já processado da fila no banco.
+        /// </summary>
+        /// <param name="numRg"></param>
+        /// <returns>ProtocoloEntity</returns>
         [HttpGet("ObterPorRg/{numRg:long}")]
         public async Task<IActionResult> ObterPorRg(long numRg)
         {
