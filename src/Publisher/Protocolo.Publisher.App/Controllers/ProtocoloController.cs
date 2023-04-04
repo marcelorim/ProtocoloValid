@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Protocolo.Models.Extensions;
 using Protocolo.Models.Utils;
 using Protocolo.Publisher.Business.Interfaces;
 
 namespace Protocolo.Publisher.App.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProtocoloController : ControllerBase
