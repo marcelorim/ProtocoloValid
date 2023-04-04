@@ -1,6 +1,7 @@
 ﻿using Bogus;
 using Microsoft.Extensions.Logging;
 using Protocolo.Models.Entities;
+using Protocolo.Models.Extensions;
 using Protocolo.Models.Utils;
 using Protocolo.Publisher.Business.Interfaces;
 using Protocolo.Publisher.Repository.Interfaces;
@@ -85,6 +86,7 @@ namespace Protocolo.Publisher.Business.Services
             }
             catch (Exception ex)
             {
+                _logger.AddLogError(ex.Message);
                 throw new Exception(ex.Message);
             }
 

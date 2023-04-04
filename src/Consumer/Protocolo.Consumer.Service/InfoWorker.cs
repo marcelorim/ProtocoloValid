@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Protocolo.Consumer.Repository.Interfaces;
-using Protocolo.Consumer.Service.Interfaces;
 using Protocolo.Models.Entities;
+using Protocolo.Models.Extensions;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
@@ -54,7 +54,39 @@ namespace Protocolo.Consumer.Services
 
         private async Task ProcessarEnvio(ProtocoloEntity protocolo)
         {
-            await _unitOfWork.Protocolo.Insert(protocolo);
+            try
+            {
+                await ValidarDadosParaInclusao(protocolo);
+                await _unitOfWork.Protocolo.Insert(protocolo);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.AddLogError("ERRO: " + ex);
+                throw new Exception("ERRO: " + ex.Message);
+            }
+
+        }
+
+        private async Task ValidarDadosParaInclusao(ProtocoloEntity protocolo)
+        {
+            //Não deverá ser aceito mais de um protocolo com o mesmo número.
+            ProtocoloEntity numProtocoloEntity = await _unitOfWork.Protocolo.GetByParametro(protocolo.NumProtocolo, null, null);
+            if (numProtocoloEntity != null)
+                throw new Exception("Não é possivel incluir o protocolo, o mesmo já existe!");
+            else
+            {
+                //CPFs e RGs não podem ter um número de via repetido. Se o CPF "X" possuir a via 1 armazenada, não deverá ser aceita via com este número novamente.
+                ProtocoloEntity numCpfEntity = await _unitOfWork.Protocolo.GetByParametro(null, protocolo.NumCpf, null);
+                if (numCpfEntity != null && numCpfEntity.NumViaDoc == protocolo.NumViaDoc)
+                    throw new Exception("Já existe uma via para o CPF cadastrado!");
+                else
+                {
+                    ProtocoloEntity numRgEntity = await _unitOfWork.Protocolo.GetByParametro(null, null, protocolo.NumRg);
+                    if (numRgEntity!= null && numRgEntity.NumViaDoc == protocolo.NumViaDoc)
+                        throw new Exception("Já existe uma via para o CPF cadastrado!");
+                }
+            }
         }
     }
 }
