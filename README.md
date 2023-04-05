@@ -33,7 +33,7 @@
 
 :small_blue_diamond: [Autenticação](#key-autenticação)
 
-:small_blue_diamond: [Desenvolvedor](#octocat-desenvolvedor)
+:small_blue_diamond: [Autor](#octocat-autor)
 
 
 ## :scroll: Descrição do projeto 
@@ -77,7 +77,7 @@
 :warning: [Github](https://github.com/) <br>
 :warning: [Bogus](https://github.com/bchavez/Bogus) <br>
 
-## :gear: Instalação e Configuração
+## :gear: Instalação e configuração
 
 É necessário fazer o download dos programas listados na sessão de pré-requisitos e executar alguns comandos para configuração deles: <br><br>
 :small_blue_diamond: **Docker**
@@ -118,7 +118,7 @@ Para realizar nos softwares a autenticação na api é necessário enviar o usu�
 |RabbitMQ|guest|guest|
 |API|valid|valid@1234|
 
-## :octocat: Desenvolvedor 
+## :octocat: Autor 
 
 | [<img src="https://avatars.githubusercontent.com/u/1753492?s=400&v=4" width=115><br><sub>Marcelo Ferreira</sub>](https://github.com/marcelorim) | 
 | :---: |
